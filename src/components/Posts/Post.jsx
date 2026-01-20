@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { PostsContext } from "../../contexts";
+
 export default function Post({ post }) {
+  const { posts, setPosts } = useContext(PostsContext);
+  const handleDelete = (postId) => {
+    setPosts(posts.filter((post) => post.id !== postId));
+  };
   return (
     <div className="border border-[#3b3440]">
       <div className="flex flex-wrap justify-between">
@@ -9,6 +16,7 @@ export default function Post({ post }) {
           <button
             type="submit"
             className="border border-[#3b3440] p-2 rounded-2xl  hover:bg-[#f54daf] hover:font-black hover:cursor-not-allowed m-1"
+            onClick={() => handleDelete(post.id)}
           >
             Delete
           </button>

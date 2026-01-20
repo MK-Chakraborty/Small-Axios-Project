@@ -7,8 +7,11 @@ export default function AddPost() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const lastId = posts.length ? posts.at(-1).id : 0;
+
     const postToAdd = {
-      id: posts.length + 1,
+      id: parseInt(lastId) + 1,
       title: newPost.title,
       body: newPost.body,
     };
