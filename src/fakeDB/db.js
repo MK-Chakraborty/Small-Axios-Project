@@ -1,0 +1,35 @@
+const posts = [
+    {
+        id: "1",
+        title: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Aut, numquam.",
+        body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse optio blanditiis, incidunt asperiores quibusdam eos, laudantium minus fugit accusamus quam amet cum possimus reiciendis beatae? Consequatur enim possimus aliquam et qui vero. Ex dolorem dolor, maiores ullam totam molestias modi!"
+    },
+    {
+        id: "2",
+        title: "Lorem ipsum dolor sit consectetur adipisicing elit. Quisquam, quos.",
+        body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse optio blanditiis, incidunt asperiores quibusdam eos, laudantium minus fugit accusamus quam amet cum possimus reiciendis beatae? Consequatur enim possimus aliquam et qui vero. Ex dolorem dolor, maiores ullam totam molestias modi!"
+    },
+    {
+        id: "3",
+        title: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque?",
+        body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse optio blanditiis, incidunt asperiores quibusdam eos, laudantium minus fugit accusamus quam amet cum possimus reiciendis beatae? Consequatur enim possimus aliquam et qui vero. Ex dolorem dolor, maiores ullam totam molestias modi!"
+    },
+    {
+        id: "4",
+        title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis.",
+        body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse optio blanditiis, incidunt asperiores quibusdam eos, laudantium minus fugit accusamus quam amet cum possimus reiciendis beatae? Consequatur enim possimus aliquam et qui vero. Ex dolorem dolor, maiores ullam totam molestias modi!"
+    },
+    {
+        id: "5",
+        title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, cumque non?",
+        body: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse optio blanditiis, incidunt asperiores quibusdam eos, laudantium minus fugit accusamus quam amet cum possimus reiciendis beatae? Consequatur enim possimus aliquam et qui vero. Ex dolorem dolor, maiores ullam totam molestias modi!"
+    },
+];
+
+export function allPosts() {
+    return posts;
+}
+
+export function post(postId) {
+    return posts.filter(post => post.id === postId);
+}
