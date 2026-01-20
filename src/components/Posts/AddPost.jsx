@@ -1,4 +1,21 @@
+import { useContext, useState } from "react";
+import { PostsContext } from "../../contexts";
+
 export default function AddPost() {
+  const { posts, setPosts } = useContext(PostsContext);
+  const [newPost, setNewPost] = useState({ title: "", body: "" });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const postToAdd = {
+      id: posts.length + 1,
+      title: newPost.title,
+      body: newPost.body,
+    };
+    setPosts([...posts, postToAdd]);
+    setNewPost({ title: "", body: "" });
+  };
+
   return (
     <section className="border-b border-[#3b3440]  pb-10">
       <div className="border-b border-[#3b3440] mt-5 mb-10">
@@ -6,16 +23,27 @@ export default function AddPost() {
           Add New Post
         </h2>
       </div>
-      <form action="" className="px-5">
+      <form onSubmit={handleSubmit} action="" className="px-5">
         <input
+          value={newPost.title}
+          onChange={(e) =>
+            setNewPost({
+              ...newPost,
+              title: e.target.value,
+            })
+          }
           type="text"
           placeholder="Post Title"
           className="block border border-[#3b3440] p-2 w-full mb-5 rounded-2xl"
+          required
         />
         <textarea
+          value={newPost.body}
+          onChange={(e) => setNewPost({ ...newPost, body: e.target.value })}
           type="text"
           placeholder="Post Description"
           className="block border border-[#3b3440] p-2 w-full mb-5 rounded-2xl"
+          required
         />
         <button
           type="submit"
