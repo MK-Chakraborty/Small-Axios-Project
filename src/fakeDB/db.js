@@ -29,7 +29,3 @@ const posts = [
 export function allPosts() {
     return posts;
 }
-
-export function post(postId) {
-    return posts.filter(post => post.id === postId);
-}
