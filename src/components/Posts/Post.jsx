@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import { PostsContext } from "../../contexts";
+import { PostsContext, UpdatePostContext } from "../../contexts";
 
 export default function Post({ post }) {
   const { posts, setPosts } = useContext(PostsContext);
+  const { setUpdatablePost } = useContext(UpdatePostContext);
   const handleDelete = (postId) => {
     setPosts(posts.filter((post) => post.id !== postId));
   };
@@ -21,6 +22,7 @@ export default function Post({ post }) {
             Delete
           </button>
           <button
+            onClick={() => setUpdatablePost({ id: post.id, updatable: true })}
             type="submit"
             className="border border-[#3b3440] p-2 rounded-2xl  hover:bg-[#40b811] hover:font-black hover:cursor-cell m-1"
           >

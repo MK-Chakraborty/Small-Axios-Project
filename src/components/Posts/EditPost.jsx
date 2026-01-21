@@ -1,4 +1,21 @@
+import { useContext, useState } from "react";
+import { PostsContext, UpdatePostContext } from "../../contexts";
+
 export default function EditPost() {
+  const { updatablePost, setUpdatablePost } = useContext(UpdatePostContext);
+  const { posts, setPosts } = useContext(PostsContext);
+  const postToEdit = posts.find((post) => post.id === updatablePost.id);
+  const [editedPost, setEditedPost] = useState(postToEdit);
+
+  const handleUpdateSave = (e) => {
+    e.preventDefault();
+    const updatedPosts = posts.map((post) => {
+      return post.id === postToEdit.id ? editedPost : post;
+    });
+    setPosts(updatedPosts);
+    setUpdatablePost({ id: 0, updatable: false });
+  };
+
   return (
     <section className="border-b border-[#3b3440]  pb-10">
       <div className="border-b border-[#3b3440] mt-5 mb-10">
@@ -6,13 +23,21 @@ export default function EditPost() {
           Edit Post
         </h2>
       </div>
-      <form action="" className="px-5">
+      <form action="" onSubmit={handleUpdateSave} className="px-5">
         <input
+          value={editedPost.title}
+          onChange={(e) =>
+            setEditedPost({ ...editedPost, title: e.target.value })
+          }
           type="text"
           placeholder="Post Title"
           className="block border border-[#3b3440] p-2 w-full mb-5 rounded-2xl"
         />
         <textarea
+          value={editedPost.body}
+          onChange={(e) =>
+            setEditedPost({ ...editedPost, body: e.target.value })
+          }
           type="text"
           placeholder="Post Description"
           className="block border border-[#3b3440] p-2 w-full mb-5 rounded-2xl"
