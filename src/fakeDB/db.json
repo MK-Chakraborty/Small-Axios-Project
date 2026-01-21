@@ -24,11 +24,16 @@
       "id": "5",
       "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, cumque non?",
       "body": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse optio blanditiis, incidunt asperiores quibusdam eos, laudantium minus fugit accusamus quam amet cum possimus reiciendis beatae? Consequatur enim possimus aliquam et qui vero. Ex dolorem dolor, maiores ullam totam molestias modi!"
+    },
+    {
+      "id": 6,
+      "title": "I'm bleeding",
+      "body": "You Hit Me!"
     }
   ],
   "tags": [
     {
-      "id": 1,
+      "id": "1",
       "title": "programming"
     }
   ]

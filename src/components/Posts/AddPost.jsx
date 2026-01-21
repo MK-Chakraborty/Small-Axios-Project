@@ -1,22 +1,38 @@
+import axios from "axios";
 import { useContext, useState } from "react";
 import { PostsContext } from "../../contexts";
 
 export default function AddPost() {
-  const { posts, setPosts } = useContext(PostsContext);
+  const { posts, setPosts, setError } = useContext(PostsContext);
   const [newPost, setNewPost] = useState({ title: "", body: "" });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const lastId = posts.length ? posts.at(-1).id : 1;
-
-    const postToAdd = {
-      id: parseInt(lastId) + 1,
-      title: newPost.title,
-      body: newPost.body,
-    };
-    setPosts([...posts, postToAdd]);
-    setNewPost({ title: "", body: "" });
+    try {
+      const lastId = posts.length ? posts.at(-1).id : 1;
+      const postToAdd = {
+        id: parseInt(lastId) + 1,
+        title: newPost.title,
+        body: newPost.body,
+      };
+      const response = await axios.post(
+        `http://localhost:8000/posts`,
+        postToAdd,
+      );
+      setPosts([...posts, response.data]);
+      setNewPost({ title: "", body: "" });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setError(
+          error.response?.data?.message ||
+            error.response?.statusText ||
+            error.message,
+        );
+      } else {
+        setError("Something went wrong");
+      }
+    }
   };
 
   return (
