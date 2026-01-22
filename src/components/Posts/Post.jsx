@@ -1,11 +1,30 @@
+import axios from "axios";
 import { useContext } from "react";
 import { PostsContext, UpdatePostContext } from "../../contexts";
 
 export default function Post({ post }) {
-  const { posts, setPosts } = useContext(PostsContext);
+  const { posts, setPosts, setError } = useContext(PostsContext);
   const { setUpdatablePost } = useContext(UpdatePostContext);
-  const handleDelete = (postId) => {
-    setPosts(posts.filter((post) => post.id !== postId));
+
+  const handleDelete = async (postId) => {
+    if (confirm("Are you sure you want to delete this post?")) {
+      try {
+        await axios.delete(`http://localhost:8000/posts/${postId}`);
+        setPosts(posts.filter((post) => post.id !== postId));
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          setError(
+            error.response?.data?.message ||
+              error.response?.statusText ||
+              error.message,
+          );
+        } else {
+          setError("Something went wrong");
+        }
+      }
+    } else {
+      console.log("You chose not to delete the post!");
+    }
   };
   return (
     <div className="border border-[#3b3440]">
@@ -17,7 +36,9 @@ export default function Post({ post }) {
           <button
             type="submit"
             className="border border-[#3b3440] p-2 rounded-2xl  hover:bg-[#f54daf] hover:font-black hover:cursor-not-allowed m-1"
-            onClick={() => handleDelete(post.id)}
+            onClick={() => {
+              handleDelete(post.id);
+            }}
           >
             Delete
           </button>

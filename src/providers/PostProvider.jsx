@@ -30,7 +30,7 @@ export default function PostProvider({ children }) {
   }, []);
 
   return (
-    <PostsContext.Provider value={{ posts, setPosts, error }}>
+    <PostsContext.Provider value={{ posts, setPosts, error, setError }}>
       {children}
     </PostsContext.Provider>
   );
