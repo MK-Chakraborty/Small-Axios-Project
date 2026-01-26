@@ -16,4 +16,14 @@ api.interceptors.request.use((config) => {
     return Promise.reject(error);
 });
 
+
+axios.interceptors.response.use((response) => {
+    return response
+}, (error) => {
+    if (error.response) {
+        error.message = `Error from server: status: ${error.response.status} ~ message: ${error.response.statusText}`;
+    }
+    return Promise.reject(error)
+});
+
 export default api;
