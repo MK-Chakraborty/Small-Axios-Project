@@ -12,7 +12,7 @@ export default function AddPost() {
     try {
       const lastId = posts.length ? posts.at(-1).id : 1;
       const postToAdd = {
-        id: parseInt(lastId) + 1,
+        id: (parseInt(lastId) + 1).toString(),
         title: newPost.title,
         body: newPost.body,
       };
