@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useContext, useState } from "react";
+import api from "../../api/api";
 import { PostsContext, UpdatePostContext } from "../../contexts";
 
 export default function EditPost() {
@@ -11,8 +11,8 @@ export default function EditPost() {
   const handleUpdateSave = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.patch(
-        `http://localhost:8000/posts/${updatablePost.id}`,
+      const response = await api.patch(
+        `/posts/${updatablePost.id}`,
         editedPost,
       );
       const updatedPosts = posts.map((post) => {
@@ -21,7 +21,7 @@ export default function EditPost() {
       setPosts(updatedPosts);
       setUpdatablePost({ id: 0, updatable: false });
     } catch (error) {
-      if (axios.isAxiosError(error)) {
+      if (api.isAxiosError(error)) {
         setError(
           error.response?.data?.message ||
             error.response?.statusText ||

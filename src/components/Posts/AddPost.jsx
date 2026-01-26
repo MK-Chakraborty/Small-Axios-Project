@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useContext, useState } from "react";
+import api from "../../api/api";
 import { PostsContext } from "../../contexts";
 
 export default function AddPost() {
@@ -16,14 +16,11 @@ export default function AddPost() {
         title: newPost.title,
         body: newPost.body,
       };
-      const response = await axios.post(
-        `http://localhost:8000/posts`,
-        postToAdd,
-      );
+      const response = await api.post(`/posts`, postToAdd);
       setPosts([...posts, response.data]);
       setNewPost({ title: "", body: "" });
     } catch (error) {
-      if (axios.isAxiosError(error)) {
+      if (api.isAxiosError(error)) {
         setError(
           error.response?.data?.message ||
             error.response?.statusText ||

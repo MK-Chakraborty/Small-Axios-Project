@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useContext } from "react";
+import api from "../../api/api";
 import { PostsContext, UpdatePostContext } from "../../contexts";
 
 export default function Post({ post }) {
@@ -9,10 +9,10 @@ export default function Post({ post }) {
   const handleDelete = async (postId) => {
     if (confirm("Are you sure you want to delete this post?")) {
       try {
-        await axios.delete(`http://localhost:8000/posts/${postId}`);
+        await api.delete(`/posts/${postId}`);
         setPosts(posts.filter((post) => post.id !== postId));
       } catch (error) {
-        if (axios.isAxiosError(error)) {
+        if (api.isAxiosError(error)) {
           setError(
             error.response?.data?.message ||
               error.response?.statusText ||
